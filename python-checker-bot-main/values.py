@@ -43,13 +43,15 @@ import bs4
 import json
 
 
-mongourl = 'MONGO_URI'
+# TODO: Replace with your actual database credentials
+mongourl = 'mongodb+srv://username:password@cluster.mongodb.net/bot?retryWrites=true&w=majority'
 client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
 maindb = client.bot['main']
 
-antidb = redis.Redis(host='REDIS_URI', port=REDIS_PASS, password='REDIS_PASS')
+# TODO: Replace with your actual Redis credentials
+antidb = redis.Redis(host='redis-host.com', port=12345, password='redis-password')
 
-BOT_USERNAME = 'BOT_USERNAME'
+BOT_USERNAME = 'your_bot_username'
 loggp = -735069168
 waste_cards = [1,2,7,8,9,0]
 
