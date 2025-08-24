@@ -43,13 +43,22 @@ import bs4
 import json
 
 
-mongourl = 'MONGO_URI'
-client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
-maindb = client.bot['main']
+# إعدادات مؤقتة للاختبار
+mongourl = 'mongodb://localhost:27017'
+try:
+    client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
+    maindb = client.bot['main']
+except:
+    print("⚠️ MongoDB غير متصل - سيتم استخدام قاعدة بيانات مؤقتة")
+    maindb = None
 
-antidb = redis.Redis(host='REDIS_URI', port=6379, password='REDIS_PASS')
+try:
+    antidb = redis.Redis(host='localhost', port=6379, password=None)
+except:
+    print("⚠️ Redis غير متصل - سيتم استخدام قاعدة بيانات مؤقتة")
+    antidb = None
 
-BOT_USERNAME = 'BOT_USERNAME'
+BOT_USERNAME = 'card_checker_bot'
 loggp = -735069168
 waste_cards = [1,2,7,8,9,0]
 
