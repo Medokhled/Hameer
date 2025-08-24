@@ -43,22 +43,35 @@ import bs4
 import json
 
 
-# إعدادات مؤقتة للاختبار
-mongourl = 'mongodb://localhost:27017'
-try:
-    client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
-    maindb = client.bot['main']
-except:
-    print("⚠️ MongoDB غير متصل - سيتم استخدام قاعدة بيانات مؤقتة")
-    maindb = None
+# إعدادات مؤقتة للاختبار بدون قاعدة بيانات
+print("⚠️ استخدام وضع الاختبار بدون قاعدة بيانات")
 
-try:
-    antidb = redis.Redis(host='localhost', port=6379, password=None)
-except:
-    print("⚠️ Redis غير متصل - سيتم استخدام قاعدة بيانات مؤقتة")
-    antidb = None
+# إنشاء قاعدة بيانات مؤقتة
+class MockDB:
+    def __init__(self):
+        self.data = {}
+    
+    def find_one(self, query):
+        return None
+    
+    def insert_one(self, data):
+        print(f"تم إدراج: {data}")
+        return True
 
-BOT_USERNAME = 'card_checker_bot'
+class MockRedis:
+    def __init__(self):
+        self.data = {}
+    
+    def set(self, key, value):
+        self.data[key] = value
+        print(f"Redis set: {key} = {value}")
+    
+    def get(self, key):
+        return self.data.get(key, 0)
+
+maindb = MockDB()
+antidb = MockRedis()
+BOT_USERNAME = 'Facemedobookbot'
 loggp = -735069168
 waste_cards = [1,2,7,8,9,0]
 

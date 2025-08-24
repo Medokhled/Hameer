@@ -42,9 +42,13 @@ Today Is {day} Of {dt_string}.
 Check And Click Down For More</b>    
 """
         await Client.send_message(chat_id=message.chat.id,text=caption,disable_web_page_preview=True,reply_to_message_id=message.message_id,reply_markup=REPLY_MARKUP)
+        print(f"تم إرسال رسالة start للمستخدم {message.from_user.id}")
     except Exception as e:
         print(f"Error in start command: {e}")
-        await Client.send_message(chat_id=message.chat.id, text="مرحباً! البوت يعمل الآن 🎉")
+        try:
+            await Client.send_message(chat_id=message.chat.id, text="مرحباً! البوت يعمل الآن 🎉")
+        except:
+            print("فشل في إرسال رسالة الخطأ")
     # try: 
     #     find = maindb.find_one({
     #         "_id": message.from_user.id,
