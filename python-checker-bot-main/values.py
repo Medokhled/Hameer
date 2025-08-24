@@ -43,24 +43,13 @@ import bs4
 import json
 
 
-# إعدادات مؤقتة للاختبار
-# TODO: Replace with your actual database credentials
-try:
-    mongourl = 'mongodb+srv://username:password@cluster.mongodb.net/bot?retryWrites=true&w=majority'
-    client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
-    maindb = client.bot['main']
-except:
-    print("⚠️ MongoDB connection failed - using mock database")
-    maindb = None
+mongourl = 'MONGO_URI'
+client = pymongo.MongoClient(mongourl,serverSelectionTimeoutMS=5000)
+maindb = client.bot['main']
 
-try:
-    # TODO: Replace with your actual Redis credentials
-    antidb = redis.Redis(host='redis-host.com', port=12345, password='redis-password')
-except:
-    print("⚠️ Redis connection failed - using mock database")
-    antidb = None
+antidb = redis.Redis(host='REDIS_URI', port=6379, password='REDIS_PASS')
 
-BOT_USERNAME = 'card_checker_bot'
+BOT_USERNAME = 'BOT_USERNAME'
 loggp = -735069168
 waste_cards = [1,2,7,8,9,0]
 
